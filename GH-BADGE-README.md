@@ -1,0 +1,83 @@
+<a href="http://github.com/subtleGradient/mootools-github-badge/" style="display:block;text-align:center;padding:2em"><img src="http://subtlegradient.github.com/mootools-github-badge/mootools-github-badge.png" width="336" height="214" alt="Mootools Github Badge" /></a>
+
+MooTools GitHub Badge
+=====================
+
+Super simple MooTools class for hooking up the JSON from GitHub with a SubtleTemplate. Create the template using custom html and it'll get populated automagically.
+
+## Usage:
+
+### In your HTML:
+
+	<div id="github-badge"></div>
+	…
+	<pre id="github-badge-template" title="{description}">
+		{fork} {forks} {homepage} {name} {owner} {private} {url} {watchers}
+	</pre>
+
+* `#github-badge` is the parent element what will be emptied and refilled.
+* `#github-badge-template` is the template that will be String.substitute'd with the results of your JSON
+* You can use any tags you want, with any attributes you want. IDs are removed.
+* The template element can contain whatever you want.
+* The
+
+
+### In your Javascript:
+
+	new SubtleTemplate.GitHubBadge(options);
+
+#### Options:
+All options are… *optional*
+
+* **username** *String*
+	default: "subtleGradient"
+* **element** *Element | ID String*
+	default: "github-badge"
+* **templateElement** *Element | ID String*
+	default: "github-badge-template"
+* **filterData** *Function*
+	default: `function(data){ return data.user.repositories; }`
+	The filterData function will be passed the JSON data as received from GitHub.com
+	Whatever filterData returns will be used to populate your SubtleTemplate instance.
+	Returning an array of objects (which is the default) will create multiple template instances.
+
+
+SubClass with FX!
+-----------------
+
+Simply replace `SubtleTemplate.GitHubBadge` with `SubtleTemplate.GitHubBadge.Fade` and you magically get animated row creation.
+
+With **SubtleTemplate.GitHubBadge.Fade** you can pass in options for the tween using the `tween` option. EG:
+
+	new SubtleTemplate.GitHubBadge.Fade({ username:'subtleGradient', tween:{ speed:'fast' }})
+
+Prebuilt Basic version!
+-----------------------
+If you don't want to fiddle with creating your own custom html and css and events...
+
+You can use a basic pre-built GitHubBadge like this:
+
+### HTML:
+
+	<div id="github-badge"></div>
+
+### JS:
+
+	new SubtleTemplate.GitHubBadge.Basic({ username:'subtleGradient' });
+
+### Options:
+
+`SubtleTemplate.GitHubBadge.Basic` is a subclass of `SubtleTemplate.GitHubBadge.Fade`, so you can use all the same options that it accepts.
+
+#### Additional options:
+
+* **theme** *String* (`'white'` | `'black'`)
+	default: 'white'
+	Themes are blatantly hard-linked to [Dr.Nic's GitHub-Badge](http://drnicwilliams.com/2008/05/03/github-badge-for-your-blog/ "Dr Nic&#8217;s GitHub Badge for your Blog with 100% guarantee of more coolness") css files.
+
+
+Thanks Dr.Nic!
+--------------
+This plugin is obviously a complete ripoff of [Dr.Nic's GitHub-Badge](http://drnicwilliams.com/2008/05/03/github-badge-for-your-blog/ "Dr Nic&#8217;s GitHub Badge for your Blog with 100% guarantee of more coolness"). But I just happen to like MooTools better than jQuery. Also, I thought I'd add about 100 additional features in about half the code ;)
+
+Oh yeah, Dr.Nic gave me permission to hard-link to his css. <q>No problems.</q> -- <cite>Dr. Nic</cite>
